@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="tag">Data Analytics &amp; Data Science Mini Project</p>
+    <h1>Know what your used car is worth.</h1>
+    <p>CarValue India uses machine learning trained on real CarDekho listings to estimate the selling price of a used car in ₹.</p>
+    <a class="btn" href="{{ url_for('predict_page') }}">Predict Car Price</a>
+    <a class="btn ghost" href="{{ url_for('compare_page') }}">Compare Two Cars</a>
+  </div>
+  <svg class="hero-car" viewBox="0 0 400 180" aria-hidden="true">
+    <path d="M30 120 L60 80 Q70 62 95 60 L250 60 Q285 62 305 85 L350 100 Q372 106 372 124 L372 135 L30 135 Z" fill="#fff"/>
+    <path d="M95 68 L165 68 L165 98 L72 98 Z M178 68 L250 68 Q272 70 288 98 L178 98 Z" fill="#0b1f3a" opacity=".85"/>
+    <circle cx="105" cy="138" r="26" fill="#0b1f3a" stroke="#fff" stroke-width="6"/>
+    <circle cx="295" cy="138" r="26" fill="#0b1f3a" stroke="#fff" stroke-width="6"/>
+    <circle cx="105" cy="138" r="9" fill="#fff"/><circle cx="295" cy="138" r="9" fill="#fff"/>
+  </svg>
+</section>
+
+<section class="cards">
+  <a class="card" href="{{ url_for('predict_page') }}"><h3>Price Prediction</h3><p>Enter brand, year, kilometres, fuel, transmission and seller type to get an estimated price and range.</p></a>
+  <a class="card" href="{{ url_for('compare_page') }}"><h3>Compare Cars</h3><p>Put two cars side by side and see which one is estimated to cost less.</p></a>
+  <a class="card" href="{{ url_for('insights_page') }}"><h3>Car Insights</h3><p>Charts built from the real dataset: brands, fuel types and selling prices.</p></a>
+  <a class="card" href="{{ url_for('performance_page') }}"><h3>Model Performance</h3><p>MAE, MSE, RMSE and R² of Linear Regression, Decision Tree and Random Forest.</p></a>
+</section>
+
+<section class="panel">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><b>Dataset:</b> real Indian used-car listings from CarDekho.</li>
+    <li><b>Cleaning:</b> missing values, duplicates, impossible values and extreme price outliers are removed.</li>
+    <li><b>Models:</b> Linear Regression, Decision Tree and Random Forest are trained on 80% of the data.</li>
+    <li><b>Selection:</b> the model with the lowest error on the unseen 20% test data is used for predictions.</li>
+  </ol>
+  {% if meta %}<p class="muted">Dataset: {{ meta.dataset_source }} · {{ meta.cleaning.rows_final }} cars used · Best model: <b>{{ meta.best_model }}</b></p>{% endif %}
+</section>
+{% endblock %}

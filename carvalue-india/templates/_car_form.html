@@ -1,0 +1,25 @@
+{% macro car_fields(meta, year_now) %}
+<div class="grid2">
+  <label>Car brand
+    <select name="brand" required>
+      <option value="">Select brand</option>
+      {% for b in meta.options.brands %}<option>{{ b }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Manufacturing year
+    <input type="number" name="year" min="1990" max="{{ year_now }}" value="{{ year_now - 5 }}" required>
+  </label>
+  <label>Kilometres driven
+    <input type="number" name="km_driven" min="0" max="1000000" value="40000" required>
+  </label>
+  <label>Fuel type
+    <select name="fuel" required>{% for f in meta.options.fuels %}<option>{{ f }}</option>{% endfor %}</select>
+  </label>
+  <label>Transmission
+    <select name="transmission" required>{% for t in meta.options.transmissions %}<option>{{ t }}</option>{% endfor %}</select>
+  </label>
+  <label>Seller type
+    <select name="seller_type" required>{% for s in meta.options.seller_types %}<option>{{ s }}</option>{% endfor %}</select>
+  </label>
+</div>
+{% endmacro %}

@@ -1,0 +1,118 @@
+{
+  "dataset_source": "Kaggle: nehalbirla/vehicle-dataset-from-cardekho (Car details v3.csv)",
+  "cleaning": {
+    "rows_raw": 8128,
+    "after_missing_values": 8128,
+    "after_duplicates": 6762,
+    "after_outliers": 6613,
+    "rows_final": 6591
+  },
+  "train_rows": 5272,
+  "test_rows": 1319,
+  "split": "80% train / 20% test, random_state=42",
+  "metrics": [
+    {
+      "model": "Linear Regression",
+      "mae": 143379.30101563936,
+      "mse": 39634532430.1598,
+      "rmse": 199084.23450931467,
+      "r2": 0.5593232276067216
+    },
+    {
+      "model": "Decision Tree Regressor",
+      "mae": 133905.2412926935,
+      "mse": 38904088136.43937,
+      "rmse": 197241.19279815606,
+      "r2": 0.5674446766067068
+    },
+    {
+      "model": "Random Forest Regressor",
+      "mae": 123174.49616545517,
+      "mse": 33014802935.86724,
+      "rmse": 181699.7604177486,
+      "r2": 0.6329247273292622
+    }
+  ],
+  "best_model": "Random Forest Regressor",
+  "best_mae": 123174.49616545517,
+  "reference_year": 2026,
+  "options": {
+    "brands": [
+      "Audi",
+      "BMW",
+      "Chevrolet",
+      "Datsun",
+      "Fiat",
+      "Ford",
+      "Honda",
+      "Hyundai",
+      "Jeep",
+      "Mahindra",
+      "Maruti",
+      "Mercedes-Benz",
+      "Mitsubishi",
+      "Nissan",
+      "Renault",
+      "Skoda",
+      "Tata",
+      "Toyota",
+      "Volkswagen"
+    ],
+    "fuels": [
+      "Cng",
+      "Diesel",
+      "Lpg",
+      "Petrol"
+    ],
+    "transmissions": [
+      "Automatic",
+      "Manual"
+    ],
+    "seller_types": [
+      "Dealer",
+      "Individual",
+      "Trustmark Dealer"
+    ]
+  },
+  "aggregates": {
+    "top_brands": {
+      "Maruti": 2089,
+      "Hyundai": 1236,
+      "Mahindra": 700,
+      "Tata": 630,
+      "Honda": 357,
+      "Ford": 350,
+      "Toyota": 324,
+      "Chevrolet": 214,
+      "Renault": 201,
+      "Volkswagen": 171
+    },
+    "fuel_counts": {
+      "Diesel": 3520,
+      "Petrol": 2977,
+      "Cng": 56,
+      "Lpg": 38
+    },
+    "avg_price_by_brand_lakh": {
+      "Jeep": 15.81,
+      "Audi": 13.84,
+      "Mercedes-Benz": 11.33,
+      "BMW": 10.88,
+      "Toyota": 7.53,
+      "Mitsubishi": 6.39,
+      "Mahindra": 6.19,
+      "Honda": 5.63,
+      "Volkswagen": 4.81,
+      "Ford": 4.73
+    },
+    "price_summary_lakh": {
+      "mean": 4.63,
+      "std": 3.0,
+      "min": 0.3,
+      "25%": 2.45,
+      "50%": 4.0,
+      "75%": 6.15,
+      "max": 18.0
+    }
+  }
+}

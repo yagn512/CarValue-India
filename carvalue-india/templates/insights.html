@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Car Insights{% endblock %}
+{% block content %}
+<section class="panel">
+  <h2>Car Insights</h2>
+  {% if meta %}
+  <p class="muted">All charts are generated from the real dataset ({{ meta.cleaning.rows_final }} cars after cleaning).</p>
+  <div class="grid2">
+    <figure class="subcard"><img src="{{ url_for('static', filename='charts/brands.png') }}" alt="Top brands"><figcaption>Brands with the most listings.</figcaption></figure>
+    <figure class="subcard"><img src="{{ url_for('static', filename='charts/fuel.png') }}" alt="Fuel types"><figcaption>Number of cars by fuel type.</figcaption></figure>
+    <figure class="subcard"><img src="{{ url_for('static', filename='charts/price.png') }}" alt="Price distribution"><figcaption>Distribution of selling prices in ₹ lakh.</figcaption></figure>
+    <figure class="subcard"><img src="{{ url_for('static', filename='charts/avg_price_brand.png') }}" alt="Average price by brand"><figcaption>Brands with the highest average selling price.</figcaption></figure>
+  </div>
+  <h3>Data behind the charts</h3>
+  <div class="grid2">
+    <div class="subcard"><b>Top brands (cars)</b>
+      <table>{% for k, v in meta.aggregates.top_brands.items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table></div>
+    <div class="subcard"><b>Fuel types (cars)</b>
+      <table>{% for k, v in meta.aggregates.fuel_counts.items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table></div>
+    <div class="subcard"><b>Average price by brand (₹ lakh)</b>
+      <table>{% for k, v in meta.aggregates.avg_price_by_brand_lakh.items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table></div>
+    <div class="subcard"><b>Selling price summary (₹ lakh)</b>
+      <table>{% for k, v in meta.aggregates.price_summary_lakh.items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table></div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

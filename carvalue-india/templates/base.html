@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CarValue India{% endblock %} – Used Car Price Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="{{ url_for('home') }}">Car<span>Value</span> India</a>
+    <input type="checkbox" id="menu-toggle" hidden>
+    <label for="menu-toggle" class="burger" aria-label="Menu">☰</label>
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('predict_page') }}">Price Prediction</a>
+      <a href="{{ url_for('compare_page') }}">Compare Cars</a>
+      <a href="{{ url_for('insights_page') }}">Car Insights</a>
+      <a href="{{ url_for('performance_page') }}">Model Performance</a>
+    </nav>
+  </header>
+  <main>
+    {% if not meta %}
+    <div class="notice">The model has not been trained yet. Open the terminal and run <code>python pipeline.py</code>, then restart the app.</div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>CarValue India – Data Analytics &amp; Data Science mini project. Prices are machine-learning estimates, not valuations.</p>
+  </footer>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

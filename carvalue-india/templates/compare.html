@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "_car_form.html" import car_fields %}
+{% block title %}Compare Cars{% endblock %}
+{% block content %}
+<section class="panel">
+  <h2>Compare Two Cars</h2>
+  {% if meta %}
+  <form id="compare-form" class="form">
+    <div class="grid2 big-gap">
+      <div class="subcard" data-car="car_a"><h3>Car A</h3>{{ car_fields(meta, year_now) }}</div>
+      <div class="subcard" data-car="car_b"><h3>Car B</h3>{{ car_fields(meta, year_now) }}</div>
+    </div>
+    <button class="btn" type="submit">Compare Prices</button>
+  </form>
+  <div id="compare-result" class="result" hidden>
+    <div class="grid2">
+      <div class="subcard"><h3>Car A</h3><div class="big" id="a-price"></div><p class="small">Range: <span id="a-range"></span></p></div>
+      <div class="subcard"><h3>Car B</h3><div class="big" id="b-price"></div><p class="small">Range: <span id="b-range"></span></p></div>
+    </div>
+    <p class="verdict" id="c-verdict"></p>
+    <p class="small">Estimates only. Ranges are the predicted price ± the model's average test error.</p>
+  </div>
+  <p id="compare-error" class="error" hidden></p>
+  {% endif %}
+</section>
+{% endblock %}

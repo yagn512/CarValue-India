@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_car_form.html" import car_fields %}
+{% block title %}Price Prediction{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h2>Used Car Price Prediction</h2>
+  {% if meta %}
+  <form id="predict-form" class="form">
+    {{ car_fields(meta, year_now) }}
+    <button class="btn" type="submit">Predict Price</button>
+  </form>
+  <div id="predict-result" class="result" hidden>
+    <p class="muted">Estimated selling price</p>
+    <div class="big" id="r-price"></div>
+    <p>Approximate range: <b id="r-range"></b></p>
+    <p class="small">This is only an estimate. The range is the predicted price ± <span id="r-mae"></span>, the average error (MAE) of the model on test data. Real prices depend on condition, location, owners, insurance and negotiation.</p>
+  </div>
+  <p id="predict-error" class="error" hidden></p>
+  {% endif %}
+</section>
+{% endblock %}

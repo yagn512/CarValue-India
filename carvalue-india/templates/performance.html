@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Model Performance{% endblock %}
+{% block content %}
+<section class="panel">
+  <h2>Model Performance</h2>
+  {% if meta %}
+  <p class="muted">Split: {{ meta.split }} ({{ meta.train_rows }} training rows, {{ meta.test_rows }} test rows). Metrics are measured on the unseen test set.</p>
+  <div class="table-wrap">
+  <table class="metrics">
+    <thead><tr><th>Model</th><th>MAE (₹)</th><th>MSE (₹²)</th><th>RMSE (₹)</th><th>R²</th></tr></thead>
+    <tbody>
+    {% for m in meta.metrics %}
+      <tr {% if m.model == meta.best_model %}class="best"{% endif %}>
+        <td>{{ m.model }}{% if m.model == meta.best_model %} <span class="badge">Best</span>{% endif %}</td>
+        <td>{{ "{:,.0f}".format(m.mae) }}</td><td>{{ "{:,.0f}".format(m.mse) }}</td>
+        <td>{{ "{:,.0f}".format(m.rmse) }}</td><td>{{ "%.4f"|format(m.r2) }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p><b>Best model: {{ meta.best_model }}</b> – selected because it has the lowest RMSE on the test data.</p>
+  <ul class="small">
+    <li><b>MAE</b>: average absolute error in ₹.</li>
+    <li><b>MSE / RMSE</b>: squared error and its square root; RMSE penalises big mistakes more.</li>
+    <li><b>R²</b>: share of price variation explained by the model (closer to 1 is better).</li>
+  </ul>
+  <figure class="subcard"><img src="{{ url_for('static', filename='charts/model_r2.png') }}" alt="R2 comparison"></figure>
+  <p class="small">Dataset: {{ meta.dataset_source }}. Cleaning: {{ meta.cleaning.rows_raw }} raw rows → {{ meta.cleaning.rows_final }} after removing missing values, duplicates, invalid values, extreme outliers and very rare brands.</p>
+  {% endif %}
+</section>
+{% endblock %}
